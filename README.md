@@ -36,3 +36,44 @@
 - [ ] 播放课程视频
 - [ ] 播放直播
 - [ ] 进行直播操作，例如发弹幕等
+- [ ] 插件功能
+- 先这么多吧
+
+4.注意事项
+- 本项目只添加了macOS的网络权限请求，iOS调试与Android可能会出现无网络权限的问题，会在未来更改权限申请文件
+
+5.调试说明（是否能够编译未知）
+- 拉取项目
+``` Bash
+git clone https://github.com/qjasn/betterbili.git
+```
+- 安装相关依赖（默认已安装brew,flutter与Xcode）
+``` Bash
+brew install rust@3.0 cocoapods
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+sudo xcodebuild -runFirstLaunch
+```
+- 进入项目目录并进行调试
+``` Bash
+# 仅支持macOS
+cd betterbili
+flutter run
+```
+
+6.鸣谢（总之涉及到的东西都写下来就对了）
+- Flutter项目
+- Bilibili项目
+- Github托管平台
+- cocoapods项目
+- Jetbarins inc.
+- Apple inc.
+- Google inc.
+
+7.贡献名单
+- 就我一个开发者，真令人伤心，当然如果你愿意贡献，就不伤心了（bushi）
+
+8.捐赠支持
+- 怎么可能会有这种东西啊，至少也得项目基本完成后才可能有吧（
+
+9.其它
+- 由于相关条例，此项目不会在中国大陆的任何网站发布可执行文件，请注意甄别
