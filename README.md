@@ -43,22 +43,28 @@
 - 本项目只添加了macOS的网络权限请求，iOS调试与Android可能会出现无网络权限的问题，会在未来更改权限申请文件
 
 5.调试说明（是否能够编译未知）
+### macOS
 - 拉取项目
 ``` Bash
 git clone https://github.com/qjasn/betterbili.git
 ```
 - 安装相关依赖（默认已安装brew,flutter与Xcode）
 ``` Bash
+# macOS
 brew install ruby@3.0 cocoapods
 sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 sudo xcodebuild -runFirstLaunch
 ```
 - 进入项目目录并进行调试
 ``` Bash
-# 仅支持macOS
 cd betterbili
 flutter run
 ```
+### Windows
+- 暂无
+### Linux
+- 暂无
+
 
 6.鸣谢（总之涉及到的东西都写下来就对了）
 - Flutter项目
