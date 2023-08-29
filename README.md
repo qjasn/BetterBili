@@ -49,7 +49,7 @@ git clone https://github.com/qjasn/betterbili.git
 ```
 - 安装相关依赖（默认已安装brew,flutter与Xcode）
 ``` Bash
-brew install rust@3.0 cocoapods
+brew install ruby@3.0 cocoapods
 sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 sudo xcodebuild -runFirstLaunch
 ```
