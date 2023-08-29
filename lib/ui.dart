@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import './http.dart';
 
+// Color映射表
 Map<String, Color> themeColorMap = {
   'gray': Colors.grey,
   'blue': Colors.blue,
@@ -28,7 +29,7 @@ class appTheme with ChangeNotifier {
   int darkMode = SpUtil.getInt("appDarkMode", defValue: 2)!;
 
   // String appThemeColor = 'deepOrange';
-
+	// 改变主题样式
   changeTheme(String themeColor) {
     appThemeColor = themeColor;
     notifyListeners();
