@@ -1,16 +1,23 @@
-# betterbili
+# BetterBili
 
-A application for bilibili
+一个使用flutter的第三方BiliBili客户端
 
-## Getting Started
+## 说明
 
-This project is a starting point for a Flutter application.
+1.开发缘由：
+- B站的客户端实在是太臃肿了，各种功能往里面砸，一会加一个短视频，一会又加一个AI，不是说这些功能不好，而是这些功能对于我来讲实在是降低我的使用体验，拜托诶，你是靠长视频起家的，你加个短视频还放到那么显眼的位置，是不是有点过分了
+- B站的自定义程度太低了，你甚至不能选择屏蔽某一个标签的视频，而B站的主题多半是需要钱的
+- B站的广告太太太太多了，平均每推荐一次视频就有一个广告或者推广视频
 
-A few resources to get you started if this is your first Flutter project:
+2.开发目标
+- 实现标签屏蔽视频
+- 实现通过UP主页内容屏蔽UP主
+- 通过使用AI屏蔽评论区内容
+- 使用单独的黑名单解除B站黑名单上限
+- 全平台支持，完成B站官方客户端80%的功能，剩下20%为短视频之类的功能
+- 可以编写插件，下载视频等
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+3.目前进度
+- 初步写成界面（真的很初步）
+- 基本实现二维码登陆（没有任何用处，只是提供了一个相关的反应登陆状态与获取的Cookie的页面）
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
