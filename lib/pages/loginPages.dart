@@ -6,18 +6,12 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import '../lists.dart';
+import '../network/apiRequest.dart';
 
-Map<String, String> bilibiliApiMap = {
-  'login_qrcode_generate':
-      "https://passport.bilibili.com/x/passport-login/web/qrcode/generate",
-  'login_qrcode_poll':
-      'https://passport.bilibili.com/x/passport-login/web/qrcode/poll',
-  'member_account': 'https://api.bilibili.com/x/member/web/account',
-  'logout': 'https://passport.bilibili.com/login/exit/v2',
-};
-
-class httpRequest extends ChangeNotifier {
-  Dio dio = new Dio();
+// 为什么这段请求不放在network目录下?你可以试试哦
+class apiRequest extends ChangeNotifier {
+  Dio dio = Dio();
   Map _qrcodeContent = {};
   var _loginData, _timer, _loginDataCookie;
   String _loginContent = "Not get Qrcode";
@@ -55,9 +49,7 @@ class httpRequest extends ChangeNotifier {
     _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) {
       _runSeconds++;
       PollQrcode();
-      var state = _loginData != null
-      ? _loginData['data']['code']
-      : null;
+      var state = _loginData != null ? _loginData['data']['code'] : null;
       switch (state) {
         case null:
           _loginContent = "Not Get qrcode";
@@ -72,7 +64,7 @@ class httpRequest extends ChangeNotifier {
           notifyListeners();
           Navigator.of(context).pop();
           CancelCheckQrcodeState();
-      };
+      }
       notifyListeners();
       if (_runSeconds == 180) {
         CancelCheckQrcodeState();
@@ -86,6 +78,7 @@ class httpRequest extends ChangeNotifier {
   }
 }
 
+
 class Login extends StatelessWidget {
   const Login({
     super.key,
@@ -95,7 +88,7 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var http = context.watch<httpRequest>();
+    var http = context.watch<apiRequest>();
     return Scaffold(
         appBar: AppBar(
           title: Text("Login"),
@@ -107,7 +100,7 @@ class Login extends StatelessWidget {
           ),
         ),
         body: Center(
-          child: QrcodeLogin(loginMethod: loginMethod, http: http),
+          child: QrcodeLogin(),
         ));
   }
 }
@@ -115,15 +108,11 @@ class Login extends StatelessWidget {
 class QrcodeLogin extends StatelessWidget {
   const QrcodeLogin({
     super.key,
-    required this.loginMethod,
-    required this.http,
   });
-
-  final String loginMethod;
-  final httpRequest http;
 
   @override
   Widget build(BuildContext context) {
+    var http = context.watch<apiRequest>();
     return Center(
       child: Column(children: [
         Text("Please scan the QRcode"),

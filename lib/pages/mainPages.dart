@@ -1,28 +1,8 @@
-import 'package:betterbili/main.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import './http.dart';
-
-// Color映射表
-Map<String, Color> themeColorMap = {
-  'gray': Colors.grey,
-  'blue': Colors.blue,
-  'blueAccent': Colors.blueAccent,
-  'cyan': Colors.cyan,
-  'deepPurple': Colors.purpleAccent,
-  'deepPurpleAccent': Colors.deepPurpleAccent,
-  'deepOrange': Colors.orangeAccent,
-  'green': Colors.green,
-  'indigo': Colors.indigo,
-  'indigoAccent': Colors.indigoAccent,
-  'orange': Colors.orange,
-  'purple': Colors.purple,
-  'pink': Colors.pink,
-  'red': Colors.red,
-  'teal': Colors.teal,
-};
+import './loginPages.dart';
+import '../lists.dart';
 
 class appTheme with ChangeNotifier {
   String appThemeColor = SpUtil.getString("appThemeColor", defValue: "blue")!;
@@ -155,10 +135,10 @@ class AccountPage extends StatelessWidget {
                 },
               );
             } else {
-              int _index = index - 1;
+              index = index - 1;
               return ListTile(
-                leading: accountIcon[_index],
-                title: Text(accountText[_index]),
+                leading: accountIcon[index],
+                title: Text(accountText[index]),
               );
             }
           },

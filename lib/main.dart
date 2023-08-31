@@ -1,16 +1,15 @@
-import 'dart:ffi';
-
-import 'package:betterbili/http.dart';
+import 'package:betterbili/pages/loginPages.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flustars/flustars.dart';
-import './ui.dart';
 
+import 'pages/mainPages.dart';
+import './lists.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-	// 初始化SpUtil
+  // 初始化SpUtil
   await SpUtil.getInstance();
-	// 加载初始页面
+  // 加载初始页面
   runApp(MyApp());
 }
 
@@ -20,17 +19,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-				// Providers 记录App State
+        // Providers 记录App State
         providers: [
           ChangeNotifierProvider(create: (context) => AppState()),
-          ChangeNotifierProvider(create: (context) => httpRequest()),
+          ChangeNotifierProvider(create: (context) => apiRequest()),
           ChangeNotifierProvider.value(value: appTheme()),
           // ChangeNotifierProvider.value(value: appDarkMode());
         ],
         child: Consumer<appTheme>(builder: (context, theme, child) {
           String themeColor = theme.appThemeColor;
           // theme.darkMode有三个值 0，1，2，详见具体的State（ui.dart中）
-					child:
+          child:
           return theme.darkMode == 2
               ? MaterialApp(
                   title: 'Better Bili',
@@ -64,13 +63,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AppState extends ChangeNotifier {
-	// 存放各种listView的内容
-  List darkModeTiles = ["Light", "Dark", "Auto"];
-  List accountText = ["Place","History","Star","Download"];
-  List accountIcon = [Icon(Icons.place),Icon(Icons.history),Icon(Icons.star_border),Icon(Icons.download)];
-}
-
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
 
@@ -93,7 +85,7 @@ class _RootPageState extends State<RootPage> {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       return Scaffold(
-					// 多平台适应，当小于等于700px的时候使用底部导航栏，大于700px的时候使用侧边导航栏
+          // 多平台适应，当小于等于700px的时候使用底部导航栏，大于700px的时候使用侧边导航栏
           bottomNavigationBar: constraints.maxWidth <= 700
               ? BottomNavigationBar(
                   currentIndex: _pageIndex,
@@ -140,7 +132,7 @@ class _RootPageState extends State<RootPage> {
               Expanded(
                 child: PageView(
                   controller: _controller,
-									// 使用两个页面，在ui.dart中
+                  // 使用两个页面，在ui.dart中
                   children: const [HomePage(), AccountPage()],
                 ),
               )
