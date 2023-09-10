@@ -1,10 +1,13 @@
 import 'package:betterbili/pages/loginPages.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/mainPages.dart';
 import './lists.dart';
+import 'generated/l10n.dart';
+import 'pages/mainPages.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // 初始化SpUtil
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
         // Providers 记录App State
         providers: [
           ChangeNotifierProvider(create: (context) => AppState()),
-          ChangeNotifierProvider(create: (context) => apiRequest()),
+          ChangeNotifierProvider(create: (context) => LoginApiRequest()),
           ChangeNotifierProvider.value(value: appTheme()),
           // ChangeNotifierProvider.value(value: appDarkMode());
         ],
@@ -33,6 +36,14 @@ class MyApp extends StatelessWidget {
           return theme.darkMode == 2
               ? MaterialApp(
                   title: 'Better Bili',
+                  localizationsDelegates: const [
+                    S.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate
+                  ],
+                  // 讲zh设置为第一项,没有适配语言时，英语为首选项
+                  supportedLocales: S.delegate.supportedLocales,
                   theme: ThemeData(
                     useMaterial3: true,
                     colorScheme: ColorScheme.fromSeed(
@@ -49,6 +60,13 @@ class MyApp extends StatelessWidget {
                 )
               : MaterialApp(
                   title: 'Better Bili',
+                  localizationsDelegates: const [
+                    S.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate
+                  ],
+                  supportedLocales: S.delegate.supportedLocales,
                   theme: ThemeData(
                     useMaterial3: true,
                     colorScheme: ColorScheme.fromSeed(
@@ -97,9 +115,9 @@ class _RootPageState extends State<RootPage> {
                   },
                   items: [
                     BottomNavigationBarItem(
-                        icon: Icon(Icons.home), label: "Home"),
+                        icon: Icon(Icons.home), label: S.of(context).HomeTitle),
                     BottomNavigationBarItem(
-                        icon: Icon(Icons.account_circle), label: "Account")
+                        icon: Icon(Icons.account_circle), label: S.of(context).AccountTitle)
                   ],
                 )
               : null,
@@ -113,11 +131,11 @@ class _RootPageState extends State<RootPage> {
                     destinations: [
                       NavigationRailDestination(
                         icon: Icon(Icons.home),
-                        label: Text('Home'),
+                        label: Text(S.of(context).HomeTitle),
                       ),
                       NavigationRailDestination(
                         icon: Icon(Icons.account_circle),
-                        label: Text("Account"),
+                        label: Text(S.of(context).AccountTitle),
                       )
                     ],
                     selectedIndex: _pageIndex,

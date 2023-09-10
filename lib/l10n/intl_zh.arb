@@ -1,0 +1,14 @@
+{
+  "DarkModeTitle": "暗黑模式设置",
+  "DarkModeAuto": "跟随系统",
+  "DarkModeDark": "深色模式",
+  "DarkModeLight": "明亮模式",
+  "LanguageTitle": "语言",
+  "HomeTitle": "主页",
+  "AccountTitle": "账户",
+  "SettingTitle": "设置",
+  "HistoryTitle": "历史记录",
+  "StarsTitle": "收藏",
+  "DownloadTitle": "下载",
+  "LoginTitle": "登陆"
+}

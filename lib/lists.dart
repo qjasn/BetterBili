@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+
+import 'generated/l10n.dart';
 // Color映射表
 Map<String, Color> themeColorMap = {
   'gray': Colors.grey,
@@ -29,12 +32,4 @@ Map<String, String> bilibiliApiMap = {
 
 class AppState extends ChangeNotifier {
   // 存放各种listView的内容
-  List darkModeTiles = ["Light", "Dark", "Auto"];
-  List accountText = ["Place", "History", "Star", "Download"];
-  List accountIcon = [
-    Icon(Icons.place),
-    Icon(Icons.history),
-    Icon(Icons.star_border),
-    Icon(Icons.download)
-  ];
 }

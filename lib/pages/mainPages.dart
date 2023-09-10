@@ -1,6 +1,8 @@
+import 'package:betterbili/pages/settingPage.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../generated/l10n.dart';
 import './loginPages.dart';
 import '../lists.dart';
 
@@ -9,7 +11,7 @@ class appTheme with ChangeNotifier {
   int darkMode = SpUtil.getInt("appDarkMode", defValue: 2)!;
 
   // String appThemeColor = 'deepOrange';
-	// 改变主题样式
+  // 改变主题样式
   changeTheme(String themeColor) {
     appThemeColor = themeColor;
     notifyListeners();
@@ -22,15 +24,20 @@ class appTheme with ChangeNotifier {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
-              title: Text("BetterBili"),
+              title: Text(S.of(context).HomeTitle),
             ),
             body: Column(
               children: [
@@ -48,73 +55,33 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class SettingPage extends StatelessWidget {
-  const SettingPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<AppState>();
-    var AppTheme = context.watch<appTheme>();
-    List darkModeTiles = appState.darkModeTiles;
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Setting"),
-          leading: BackButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        body: ListView.separated(
-          itemBuilder: (BuildContext context, index) {
-            if (index == 0) {
-              return ListTile(
-                title: Text("Dark Mode Setting"),
-              );
-            } else if (index > 0 && index <= 3) {
-              return RadioListTile(
-                  value: index - 1,
-                  groupValue: AppTheme.darkMode,
-                  onChanged: (e) {
-                    AppTheme.changeDarkMode(e!);
-                  },
-                  title: Text(darkModeTiles[index - 1]));
-            } else if (index == 4) {
-              return ListTile(
-                title: Text("Theme Setting"),
-              );
-            }
-            return null;
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            if (index != 0 && index != 4) {
-              return Divider();
-            } else {
-              return Container();
-            }
-          },
-          itemCount: 100,
-        ));
-  }
-}
-
-class AccountPage extends StatelessWidget {
+class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
 
   @override
+  State<AccountPage> createState() => _AccountPageState();
+}
+
+class _AccountPageState extends State<AccountPage> {
+  @override
   Widget build(BuildContext context) {
-    var appState = context.watch<AppState>();
-    var accountText = appState.accountText;
-    var accountIcon = appState.accountIcon;
+
+    List accountText = ["Place", S.of(context).HistoryTitle, S.of(context).StarsTitle, S.of(context).DownloadTitle];
+    List accountIcon = [
+      Icon(Icons.place),
+      Icon(Icons.history),
+      Icon(Icons.star_border),
+      Icon(Icons.download)
+    ];
     return Scaffold(
         appBar: AppBar(
-          title: Text("Account"),
+          title: Text(S.of(context).AccountTitle),
         ),
         body: ListView.separated(
           itemBuilder: (BuildContext context, index) {
             if (index < 1) {
               return ListTile(
-                title: Text("login"),
+                title: Text(S.of(context).LoginTitle),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -127,7 +94,7 @@ class AccountPage extends StatelessWidget {
               );
             } else if (index == 5) {
               return ListTile(
-                title: Text("Setting"),
+                title: Text(S.of(context).SettingTitle),
                 leading: Icon(Icons.settings),
                 onTap: () {
                   Navigator.push(context,

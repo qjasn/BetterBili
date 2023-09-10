@@ -1,0 +1,14 @@
+{
+  "DarkModeTitle": "Dark Mode Setting",
+  "DarkModeAuto": "Auto",
+  "DarkModeDark": "Dark",
+  "DarkModeLight": "Light",
+  "LanguageTitle": "Language",
+  "HomeTitle": "Home",
+  "AccountTitle": "Account",
+  "SettingTitle": "Settings",
+  "HistoryTitle": "History",
+  "StarsTitle": "Stars",
+  "DownloadTitle": "Download",
+  "LoginTitle": "Login"
+}

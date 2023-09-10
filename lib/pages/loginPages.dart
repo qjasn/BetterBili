@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import '../generated/l10n.dart';
 import '../lists.dart';
 import '../network/apiRequest.dart';
 
 // 为什么这段请求不放在network目录下?你可以试试哦
-class apiRequest extends ChangeNotifier {
+class LoginApiRequest extends ChangeNotifier {
   Dio dio = Dio();
   Map _qrcodeContent = {};
   var _loginData, _timer, _loginDataCookie;
@@ -79,7 +79,7 @@ class apiRequest extends ChangeNotifier {
 }
 
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({
     super.key,
     required String method,
@@ -87,11 +87,17 @@ class Login extends StatelessWidget {
   final String loginMethod;
 
   @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+
+  @override
   Widget build(BuildContext context) {
-    var http = context.watch<apiRequest>();
+    var http = context.watch<LoginApiRequest>();
     return Scaffold(
         appBar: AppBar(
-          title: Text("Login"),
+          title: Text(S.of(context).LoginTitle),
           leading: BackButton(
             onPressed: () {
               Navigator.pop(context);
@@ -112,7 +118,7 @@ class QrcodeLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var http = context.watch<apiRequest>();
+    var http = context.watch<LoginApiRequest>();
     return Center(
       child: Column(children: [
         Text("Please scan the QRcode"),
